@@ -1,0 +1,30 @@
+name: Deploy to Azure Storage
+
+on:
+  workflow_run:
+    workflows: ["Unity - Build"]
+    types:
+      - completed
+      
+jobs:
+  upload:
+    name: Upload to Azure Storage
+    runs-on: ubuntu-latest
+    steps:
+      # Load artifact from previous job
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v3
+        with:
+          name: Build
+          path: ~/artifact
+      - name: List files
+        run: ls -R
+        working-directory: ~/artifact
+
+      # Upload to azure blob storage
+      - uses: bacongobbler/azure-blob-storage-upload@main
+        with:
+          source_dir: ~/artifact
+          container_name: model-viewer
+          connection_string: ${{ secrets.BLOB_CONNECTION_STRING }}
+          overwrite: 'true'
