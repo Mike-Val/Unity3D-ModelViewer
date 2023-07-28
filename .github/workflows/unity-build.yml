@@ -67,6 +67,7 @@ jobs:
 # UPLOAD BUILD TO AZURE CONTAINER
   upload:
     name: Upload to Azure Storage
+    needs: build
     runs-on: ubuntu-latest
     steps:
       # Load artifact from previous job
