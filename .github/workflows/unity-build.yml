@@ -62,7 +62,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           name: Build
-          path: ~/artifact
+          path: build
           
 # UPLOAD BUILD TO AZURE CONTAINER
   upload:
@@ -71,11 +71,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Load artifact from previous job
-      # - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
         with:
           name: Build
-          #path: ~/artifact
+          path: build
       - name: List files
         run: ls -R
         working-directory: ~/artifact
