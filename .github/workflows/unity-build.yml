@@ -78,12 +78,12 @@ jobs:
           path: build
       - name: List files
         run: ls -R
-        working-directory: ~/artifact
+        working-directory: build
 
       # Upload to azure blob storage
       - uses: bacongobbler/azure-blob-storage-upload@main
         with:
-          source_dir: ~/artifact
+          source_dir: build
           container_name: model-viewer
           connection_string: ${{ secrets.BLOB_CONNECTION_STRING }}
           overwrite: 'true'
