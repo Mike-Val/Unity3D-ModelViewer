@@ -75,7 +75,7 @@ jobs:
         with:
           source_dir: ./ModelViewer/CodeCoverage
           container_name: test
-          connection_string: ${{ secrets.ConnectionString }}
+          connection_string: ${{ secrets.BLOB_CONNECTION_STRING }}
           extra_args: '--pattern *.tar.gz'
           # WARNING: this will overwrite existing blobs in your blob storage
           overwrite: 'true'
